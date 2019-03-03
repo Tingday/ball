@@ -33,6 +33,26 @@ Private Declare Function sndPlaySoundFromMemory Lib "winmm.dll" Alias "sndPlaySo
 '---gdi32---
 Private Declare Function FillRgn Lib "gdi32.dll" (ByVal hdc As Long, ByVal hRgn As Long, ByVal hBrush As Long) As Long
 Private Declare Function CreateSolidBrush Lib "gdi32.dll" (ByVal crColor As Long) As Long
+Private Declare Function BeginPaint Lib "user32.dll" (ByVal hwnd As Long, ByRef lpPaint As PAINTSTRUCT) As Long
+Private Declare Function EndPaint Lib "user32.dll" (ByVal hwnd As Long, ByRef lpPaint As PAINTSTRUCT) As Long
+Private Declare Function DeleteObject Lib "gdi32.dll" (ByVal hObject As Long) As Long
+
+'---tpye---
+Private Type RECT
+    Left As Long
+    Top As Long
+    Right As Long
+    Bottom As Long
+End Type
+
+Private Type PAINTSTRUCT
+    hdc As Long
+    fErase As Long
+    rcPaint As RECT
+    fRestore As Long
+    fIncUpdate As Long
+    rgbReserved As Byte
+End Type
 
 '---常量---
 Private Const SND_ASYNC As Long = &H1
@@ -116,6 +136,12 @@ End Sub
 
 
 Private Sub Form_Load() '数据初始化
+    Dim hdc2 As Long
+    Dim blackBrush As Long
+    
+    blackBrush = CreateSolidBrush(RGB(255, 255, 255))
+    
+    hdc2 = Me.hdc
     '控制数据
     mGame_State = Game_STATE_STOP
     Control_interval = 80
