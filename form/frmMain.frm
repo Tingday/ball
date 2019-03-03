@@ -30,6 +30,11 @@ Option Explicit
 Private Declare Sub Sleep Lib "kernel32.dll" (ByVal dwMilliseconds As Long)
 Private Declare Function timeGetTime Lib "winmm.dll" () As Long
 Private Declare Function sndPlaySoundFromMemory Lib "winmm.dll" Alias "sndPlaySoundA" (lpszSoundName As Any, ByVal uFlags As Long) As Long
+'---gdi32---
+Private Declare Function FillRgn Lib "gdi32.dll" (ByVal hdc As Long, ByVal hRgn As Long, ByVal hBrush As Long) As Long
+Private Declare Function CreateSolidBrush Lib "gdi32.dll" (ByVal crColor As Long) As Long
+
+'---常量---
 Private Const SND_ASYNC As Long = &H1
 Private Const SND_MEMORY As Long = &H4
 '---游戏全局---
