@@ -111,6 +111,9 @@ End Sub
 
 
 Private Sub Form_Load() '数据初始化
+    'Font
+    Me.FontSize = 10
+    Me.FontName = "微软雅黑"
     '控制数据
     mGame_State = Game_STATE_STOP
     Control_interval = 80
@@ -219,7 +222,6 @@ Private Sub Game_Loop() '进入游戏循环
                     End If
                 Next i
                 If n = 0 Then
-                    Me.FontSize = 16
                     Me.ForeColor = vbRed
                     Me.CurrentX = 625
                     Me.CurrentY = 41
@@ -228,7 +230,6 @@ Private Sub Game_Loop() '进入游戏循环
                 End If
                 '失败判断
                 If Ball_Y - Ball_R >= 600 Then
-                    Me.FontSize = 16
                     Me.ForeColor = vbRed
                     Me.CurrentX = 625
                     Me.CurrentY = 41
@@ -242,7 +243,7 @@ Private Sub Game_Loop() '进入游戏循环
                 End If
             End If
         End If
-        Sleep (2)
+        Sleep 10 '睡眠时间
     Wend
 End Sub
 '矩形圆形碰撞检测
@@ -279,13 +280,11 @@ Private Sub Frame_Draw()
     Me.ForeColor = vbBlack
     Me.DrawWidth = 1
     Me.Line (600, 0)-(600, 600)
-    Me.FontSize = 16
     Me.CurrentX = 620
     Me.CurrentY = 20
     Me.Print "分数：" & Score
     '监测数据
     If Data_Survey = True Then
-        Me.FontSize = 10
         Me.CurrentX = 620
         Me.CurrentY = 180
         Me.Print "数据监测"
@@ -302,8 +301,6 @@ Private Sub Frame_Draw()
         Me.CurrentY = 260
         Me.Print "Ball_X:" & Ball_X
     End If
-    Me.FontSize = 10
-    Me.FontName = "微软雅黑"
     Me.CurrentX = 620
     Me.CurrentY = 500
     Me.Print "作者：0yufan0@VB吧"
